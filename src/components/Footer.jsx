@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <h3>Chawla Medicos</h3>
+              <h3>Export Healthcare</h3>
               <p>Your Healthcare Partner</p>
             </div>
             <p>
@@ -68,14 +68,14 @@ const Footer = () => {
             <div className="contact-item">
               <span className="icon">📞</span>
               <div>
-                <p>+91-11-XXXXXXXX</p>
-                <p>+91-11-YYYYYYYY</p>
+                <p>+91-9311459973</p>
+                
               </div>
             </div>
             <div className="contact-item">
               <span className="icon">📧</span>
               <div>
-                <p>info@chawlamedicos.com</p>
+                <p>info@exporthealthcare.com</p>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ const Footer = () => {
         
         <div className="footer-bottom">
           <div className="footer-bottom-content">
-            <p>&copy; 2025 Chawla Medicos. All rights reserved.</p>
+            <p>&copy; 2025 Export Healthcare. All rights reserved.</p>
             <div className="footer-bottom-links">
               <a href="#privacy">Privacy Policy</a>
               <a href="#terms">Terms of Service</a>

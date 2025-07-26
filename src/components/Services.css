@@ -101,22 +101,6 @@
   box-shadow: 0 8px 20px rgba(44, 90, 160, 0.3);
 }
 
-@media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .services-header h2 {
-    font-size: 2rem;
-  }
-  
-  .services-header p {
-    font-size: 1.1rem;
-  }
-  
-  .service-card {
-    padding: 30px 20px;
 /* Responsive Design */
 @media (max-width: 1200px) {
   .services {

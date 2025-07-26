@@ -7,10 +7,10 @@ const About = () => {
       <div className="container">
         <div className="about-content">
           <div className="about-text">
-            <h2>About Chawla Medicos</h2>
+            <h2>About Export Healthcare</h2>
             <p className="lead">
               With over two decades of experience in the healthcare industry, 
-              Chawla Medicos has been a trusted name in providing quality 
+              Export Healthcare has been a trusted name in providing quality 
               medical services and products to our community.
             </p>
             

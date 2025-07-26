@@ -58,9 +58,9 @@ const Contact = () => {
               <div className="info-icon">📞</div>
               <h3>Call Us</h3>
               <p>
-                Main: +91-11-XXXXXXXX<br/>
-                Emergency: +91-11-YYYYYYYY<br/>
-                WhatsApp: +91-98XXXXXXXX
+                Main: +91-9311459973<br/>
+                Emergency: +91-9311459973<br/>
+                WhatsApp: +91-9311459973
               </p>
             </div>
             
@@ -68,9 +68,9 @@ const Contact = () => {
               <div className="info-icon">📧</div>
               <h3>Email Us</h3>
               <p>
-                info@chawlamedicos.com<br/>
-                appointments@chawlamedicos.com<br/>
-                emergency@chawlamedicos.com
+                varunsingh04.online@gmail.com<br/>
+                appointments@exporthealthcare.com<br/>
+                emergency@exporthealthcare.com
               </p>
             </div>
             

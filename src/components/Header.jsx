@@ -97,14 +97,14 @@ const Header = () => {
                 <span className="contact-icon">📧</span>
                 <div className="contact-details">
                   <span>MAIL US TODAY</span>
-                  <span>info@chawlamedicos.com</span>
+                  <span>info@exporthealthcare.com</span>
                 </div>
               </div>
               <div className="contact-item">
                 <span className="contact-icon">📞</span>
                 <div className="contact-details">
                   <span>CALL US FOR MORE DETAILS</span>
-                  <span>+91-9876543210</span>
+                  <span>+91-9311459973</span>
                 </div>
               </div>
             </div>
@@ -115,8 +115,8 @@ const Header = () => {
                 <div className="logo-container">
                   <div className="logo-plus">✚</div>
                   <div className="logo-text">
-                    <div className="logo-line">CHAWLA</div>
-                    <div className="logo-line">MEDICOS</div>
+                    <div className="logo-line">EXPORT</div>
+                    <div className="logo-line">HEALTHCARE</div>
                   </div>
                 </div>
                 <p className="tagline">Your Health, Our Priority</p>
