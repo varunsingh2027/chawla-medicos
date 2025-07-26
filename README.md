@@ -1,6 +1,6 @@
 # Export Healthcare Website 
 
-A modern, responsive React.js frontend clone of the Chawla Medicos website. This project showcases a professional medical website with clean design, modern UI components, and responsive layout.
+A modern, responsive React.js frontend  website. This project showcases a professional medical website with clean design, modern UI components, and responsive layout.
 
 ## 🏥 Features
 
