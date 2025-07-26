@@ -1,4 +1,4 @@
-# Chawla Medicos - Healthcare Website Clone
+# Export Healthcare Website 
 
 A modern, responsive React.js frontend clone of the Chawla Medicos website. This project showcases a professional medical website with clean design, modern UI components, and responsive layout.
 
@@ -70,7 +70,7 @@ The website is fully responsive and optimized for:
 
 ## 📧 Contact Information
 
-This is a demo website clone. For actual medical services, please contact the real Chawla Medicos facility.
+This is a demo website . 
 
 ## 🤝 Contributing
 
