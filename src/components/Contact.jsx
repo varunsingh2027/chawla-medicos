@@ -9,6 +9,7 @@ const Contact = () => {
     service: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,11 +18,77 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will contact you soon.');
+    setIsLoading(true);
+
+    try {
+      // Method 1: Try FormSubmit with proper configuration
+      const formData2 = new FormData();
+      formData2.append('name', formData.name);
+      formData2.append('email', formData.email);
+      formData2.append('phone', formData.phone);
+      formData2.append('service', formData.service);
+      formData2.append('message', formData.message);
+      formData2.append('_subject', `New Contact Form Submission from ${formData.name}`);
+      formData2.append('_next', window.location.href);
+      formData2.append('_captcha', 'false');
+
+      const response = await fetch('https://formsubmit.co/varunsingh04.online@gmail.com', {
+        method: 'POST',
+        body: formData2
+      });
+
+      // FormSubmit redirects on success, so if we reach here without error, it worked
+      if (response.ok || response.redirected) {
+        alert('Thank you for your message! We will contact you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+        setIsLoading(false);
+        return;
+      }
+    } catch (error) {
+      console.log('FormSubmit failed, trying alternative...', error);
+    }
+
+    try {
+      // Method 2: Alternative service - EmailJS (you need to set this up)
+      // For now, this will fail and go to mailto
+      throw new Error('EmailJS not configured yet');
+    } catch (error) {
+      console.log('Alternative services failed, using mailto...', error);
+    }
+
+    // Fallback: Open email client with pre-filled content
+    const emailSubject = `Contact Form Submission from ${formData.name}`;
+    const emailBody = `Hi,
+
+I'm contacting you through your website contact form.
+
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Service Interested: ${formData.service}
+
+Message:
+${formData.message}
+
+Best regards,
+${formData.name}`;
+
+    const mailtoLink = `mailto:varunsingh04.online@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open in new tab to avoid navigation issues
+    window.open(mailtoLink, '_blank');
+    
+    alert('Your email client will open with a pre-filled message. Please click Send to complete your message submission.');
+    
+    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -29,6 +96,8 @@ const Contact = () => {
       service: '',
       message: ''
     });
+
+    setIsLoading(false);
   };
 
   return (
@@ -155,8 +224,8 @@ const Contact = () => {
                 ></textarea>
               </div>
               
-              <button type="submit" className="submit-btn">
-                Send Message
+              <button type="submit" className="submit-btn" disabled={isLoading}>
+                {isLoading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
