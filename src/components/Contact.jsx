@@ -22,26 +22,49 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.message) {
+      alert('Please fill in all required fields (Name, Email, and Message).');
+      setIsLoading(false);
+      return;
+    }
+
+    // Create email content
+    const emailSubject = `Contact Form: ${formData.name} - ${formData.service || 'General Inquiry'}`;
+    const emailBody = `Hello,
+
+You have received a new message from your website contact form:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTACT DETAILS:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone || 'Not provided'}
+Service Interest: ${formData.service || 'General Inquiry'}
+
+MESSAGE:
+${formData.message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Please reply directly to this email to respond to the customer.
+
+Sent from: PharmaExport-Distributor Website
+Time: ${new Date().toLocaleString()}`;
+
     try {
-      // Method 1: Try FormSubmit with proper configuration
-      const formData2 = new FormData();
-      formData2.append('name', formData.name);
-      formData2.append('email', formData.email);
-      formData2.append('phone', formData.phone);
-      formData2.append('service', formData.service);
-      formData2.append('message', formData.message);
-      formData2.append('_subject', `New Contact Form Submission from ${formData.name}`);
-      formData2.append('_next', window.location.href);
-      formData2.append('_captcha', 'false');
-
-      const response = await fetch('https://formsubmit.co/varunsingh04.online@gmail.com', {
-        method: 'POST',
-        body: formData2
-      });
-
-      // FormSubmit redirects on success, so if we reach here without error, it worked
-      if (response.ok || response.redirected) {
-        alert('Thank you for your message! We will contact you soon.');
+      // Create mailto link
+      const mailtoLink = `mailto:varunsingh04.online@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      setTimeout(() => {
+        alert('Your email client should open with the message. Please click "Send" in your email application to complete the submission.');
+        
+        // Reset form
         setFormData({
           name: '',
           email: '',
@@ -49,53 +72,12 @@ const Contact = () => {
           service: '',
           message: ''
         });
-        setIsLoading(false);
-        return;
-      }
+      }, 500);
+
     } catch (error) {
-      console.log('FormSubmit failed, trying alternative...', error);
+      console.error('Error opening email client:', error);
+      alert('Unable to open email client. Please manually send an email to varunsingh04.online@gmail.com with your inquiry.');
     }
-
-    try {
-      // Method 2: Alternative service - EmailJS (you need to set this up)
-      // For now, this will fail and go to mailto
-      throw new Error('EmailJS not configured yet');
-    } catch (error) {
-      console.log('Alternative services failed, using mailto...', error);
-    }
-
-    // Fallback: Open email client with pre-filled content
-    const emailSubject = `Contact Form Submission from ${formData.name}`;
-    const emailBody = `Hi,
-
-I'm contacting you through your website contact form.
-
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Service Interested: ${formData.service}
-
-Message:
-${formData.message}
-
-Best regards,
-${formData.name}`;
-
-    const mailtoLink = `mailto:varunsingh04.online@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    // Open in new tab to avoid navigation issues
-    window.open(mailtoLink, '_blank');
-    
-    alert('Your email client will open with a pre-filled message. Please click Send to complete your message submission.');
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
 
     setIsLoading(false);
   };
@@ -225,8 +207,24 @@ ${formData.name}`;
               </div>
               
               <button type="submit" className="submit-btn" disabled={isLoading}>
-                {isLoading ? 'Sending...' : 'Send Message'}
+                {isLoading ? 'Opening Email...' : 'Send Message'}
               </button>
+              
+              <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                <p style={{ fontSize: '14px', color: '#666', margin: '10px 0' }}>
+                  Having trouble with the form? 
+                </p>
+                <a 
+                  href="mailto:varunsingh04.online@gmail.com?subject=Contact%20Inquiry&body=Hi,%0D%0A%0D%0APlease%20enter%20your%20message%20here.%0D%0A%0D%0AThank%20you!"
+                  style={{ 
+                    color: '#2c5aa0', 
+                    textDecoration: 'underline',
+                    fontSize: '14px'
+                  }}
+                >
+                  Click here to email us directly
+                </a>
+              </div>
             </form>
           </div>
         </div>
