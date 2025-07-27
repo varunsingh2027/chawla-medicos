@@ -55,13 +55,13 @@ const Header = () => {
           </div>
 
           {/* Center Section - Middle Links */}
-          <div className="header-top-center">
+          {/* <div className="header-top-center">
             <div className="top-center">
               <a href="#track-parcel" className="top-link">Track Parcel</a>
               <a href="#helpdesk" className="top-link">Helpdesk</a>
               <a href="#review" className="top-link">Review</a>
             </div>
-          </div>
+          </div> */}
 
           {/* Right Section - Social Media Icons */}
           <div className="header-top-right">
@@ -192,7 +192,7 @@ const Header = () => {
                 </ul>
               </li>
               
-              <li className="dropdown">
+              {/* <li className="dropdown">
                 <a href="#consultation" className="nav-link">
                   Consultation 
                   <span className="dropdown-arrow">▼</span>
@@ -208,11 +208,11 @@ const Header = () => {
                   <li><a href="#health-checkup">Health Checkup Packages</a></li>
                   <li><a href="#prescription-upload">Upload Prescription</a></li>
                 </ul>
-              </li>
+              </li> */}
               
-              <li><a href="#generic" className="nav-link">Generic</a></li>
+              {/* <li><a href="#generic" className="nav-link">Generic</a></li>
               <li><a href="#registration" className="nav-link">Registration</a></li>
-              <li><a href="#blog" className="nav-link">Blog</a></li>
+              <li><a href="#blog" className="nav-link">Blog</a></li> */}
               
               <li className="dropdown">
                 <a href="#contact" className="nav-link">
