@@ -135,7 +135,9 @@ const Header = () => {
         <div className="container">
           <nav className="main-navigation">
             <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-              <li><a href="#home" className="nav-link"><span className="nav-icon">🏠</span>Home</a></li>
+              <li><a href="#home" className="nav-link">
+                <span className="nav-icon">🏠</span>Home
+              </a></li>
               
               <li className="dropdown">
                 <a href="#about" className="nav-link">
