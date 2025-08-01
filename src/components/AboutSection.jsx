@@ -73,7 +73,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="about-section">
+    <section className="about-section" id="categories">
       <div className="container">
         {/* Main Content */}
         <div className="about-content">

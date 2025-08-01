@@ -37,6 +37,53 @@ const Header = () => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
   };
 
+  const handleNavigation = (targetId, e) => {
+    e.preventDefault();
+    
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+    
+    // Close any active dropdowns
+    setActiveDropdown(null);
+    
+    // Smooth scroll to target section with offset for sticky header
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const headerOffset = 120; // Height of sticky header
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleDropdownNavigation = (targetId, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Close mobile menu and dropdowns
+    setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+    
+    // Smooth scroll to target section with offset for sticky header
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const headerOffset = 120; // Height of sticky header
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <>
       {/* First Header Component - Language dropdown, middle links, social icons - WILL SCROLL AWAY */}
@@ -135,12 +182,12 @@ const Header = () => {
         <div className="container">
           <nav className="main-navigation">
             <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-              <li><a href="#home" className="nav-link">
+              <li><a href="#home" className="nav-link" onClick={(e) => handleNavigation('home', e)}>
                 <span className="nav-icon">🏠</span>Home
               </a></li>
               
               <li className="dropdown">
-                <a href="#about" className="nav-link">
+                <a href="#about" className="nav-link" onClick={(e) => handleNavigation('about', e)}>
                   <span className="nav-icon">ℹ️</span>About 
                   <span className="dropdown-arrow">▼</span>
                 </a>
@@ -149,16 +196,16 @@ const Header = () => {
                   onClick={(e) => toggleMobileDropdown('about', e)}
                 >▼</span>
                 <ul className={`dropdown-menu ${activeDropdown === 'about' ? 'mobile-show' : ''}`}>
-                  <li><a href="#our-story">Our Story</a></li>
-                  <li><a href="#mission-vision">Mission & Vision</a></li>
-                  <li><a href="#our-team">Our Team</a></li>
-                  <li><a href="#awards">Awards & Certifications</a></li>
-                  <li><a href="#testimonials">Customer Testimonials</a></li>
+                  <li><a href="#about" onClick={(e) => handleDropdownNavigation('about', e)}>Our Story</a></li>
+                  <li><a href="#about" onClick={(e) => handleDropdownNavigation('about', e)}>Mission & Vision</a></li>
+                  <li><a href="#about" onClick={(e) => handleDropdownNavigation('about', e)}>Our Team</a></li>
+                  <li><a href="#about" onClick={(e) => handleDropdownNavigation('about', e)}>Awards & Certifications</a></li>
+                  <li><a href="#about" onClick={(e) => handleDropdownNavigation('about', e)}>Customer Testimonials</a></li>
                 </ul>
               </li>
               
               <li className="dropdown">
-                <a href="#categories" className="nav-link">
+                <a href="#categories" className="nav-link" onClick={(e) => handleNavigation('categories', e)}>
                   Categories 
                   <span className="dropdown-arrow">▼</span>
                 </a>
@@ -167,17 +214,17 @@ const Header = () => {
                   onClick={(e) => toggleMobileDropdown('categories', e)}
                 >▼</span>
                 <ul className={`dropdown-menu ${activeDropdown === 'categories' ? 'mobile-show' : ''}`}>
-                  <li><a href="#medicines">Medicines</a></li>
-                  <li><a href="#supplements">Supplements</a></li>
-                  <li><a href="#equipment">Medical Equipment</a></li>
-                  <li><a href="#ayurvedic">Ayurvedic Products</a></li>
-                  <li><a href="#surgical">Surgical Instruments</a></li>
-                  <li><a href="#diagnostic">Diagnostic Kits</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Medicines</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Supplements</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Medical Equipment</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Ayurvedic Products</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Surgical Instruments</a></li>
+                  <li><a href="#categories" onClick={(e) => handleDropdownNavigation('categories', e)}>Diagnostic Kits</a></li>
                 </ul>
               </li>
               
               <li className="dropdown">
-                <a href="#salt-manufacturer" className="nav-link">
+                <a href="#salt-manufacturer" className="nav-link" onClick={(e) => handleNavigation('salt-manufacturer', e)}>
                   Salt & Manufacturer 
                   <span className="dropdown-arrow">▼</span>
                 </a>
@@ -186,11 +233,11 @@ const Header = () => {
                   onClick={(e) => toggleMobileDropdown('salt-manufacturer', e)}
                 >▼</span>
                 <ul className={`dropdown-menu ${activeDropdown === 'salt-manufacturer' ? 'mobile-show' : ''}`}>
-                  <li><a href="#salt-search">Search by Salt</a></li>
-                  <li><a href="#manufacturer-search">Search by Manufacturer</a></li>
-                  <li><a href="#generic-alternatives">Generic Alternatives</a></li>
-                  <li><a href="#brand-comparison">Brand Comparison</a></li>
-                  <li><a href="#drug-interactions">Drug Interactions</a></li>
+                  <li><a href="#salt-manufacturer" onClick={(e) => handleDropdownNavigation('salt-manufacturer', e)}>Search by Salt</a></li>
+                  <li><a href="#salt-manufacturer" onClick={(e) => handleDropdownNavigation('salt-manufacturer', e)}>Search by Manufacturer</a></li>
+                  <li><a href="#salt-manufacturer" onClick={(e) => handleDropdownNavigation('salt-manufacturer', e)}>Generic Alternatives</a></li>
+                  <li><a href="#salt-manufacturer" onClick={(e) => handleDropdownNavigation('salt-manufacturer', e)}>Brand Comparison</a></li>
+                  <li><a href="#salt-manufacturer" onClick={(e) => handleDropdownNavigation('salt-manufacturer', e)}>Drug Interactions</a></li>
                 </ul>
               </li>
               
@@ -217,7 +264,7 @@ const Header = () => {
               <li><a href="#blog" className="nav-link">Blog</a></li> */}
               
               <li className="dropdown">
-                <a href="#contact" className="nav-link">
+                <a href="#contact" className="nav-link" onClick={(e) => handleNavigation('contact', e)}>
                   Contact Us 
                   <span className="dropdown-arrow">▼</span>
                 </a>
@@ -226,11 +273,11 @@ const Header = () => {
                   onClick={(e) => toggleMobileDropdown('contact', e)}
                 >▼</span>
                 <ul className={`dropdown-menu ${activeDropdown === 'contact' ? 'mobile-show' : ''}`}>
-                  <li><a href="#contact-form">Contact Form</a></li>
-                  <li><a href="#store-locations">Store Locations</a></li>
-                  <li><a href="#customer-support">Customer Support</a></li>
-                  <li><a href="#bulk-orders">Bulk Orders</a></li>
-                  <li><a href="#feedback">Feedback & Complaints</a></li>
+                  <li><a href="#contact" onClick={(e) => handleDropdownNavigation('contact', e)}>Contact Form</a></li>
+                  <li><a href="#contact" onClick={(e) => handleDropdownNavigation('contact', e)}>Store Locations</a></li>
+                  <li><a href="#contact" onClick={(e) => handleDropdownNavigation('contact', e)}>Customer Support</a></li>
+                  <li><a href="#contact" onClick={(e) => handleDropdownNavigation('contact', e)}>Bulk Orders</a></li>
+                  <li><a href="#contact" onClick={(e) => handleDropdownNavigation('contact', e)}>Feedback & Complaints</a></li>
                 </ul>
               </li>
             </ul>

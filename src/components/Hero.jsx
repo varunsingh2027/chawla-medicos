@@ -1,9 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Hero.css';
+import apiService from '../services/api.js';
 
 const Hero = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
+      setShowResults(false);
+      return;
+    }
+
+    setIsSearching(true);
+    setShowResults(true);
+
+    try {
+      // Try to fetch from backend API
+      const result = await apiService.searchMedicines(searchQuery);
+      setSearchResults(result.data || []);
+    } catch (error) {
+      console.error('Search failed:', error);
+      // Fallback to empty results
+      setSearchResults([]);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    if (e.target.value.trim() === '') {
+      setShowResults(false);
+      setSearchResults([]);
+    }
+  };
+
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       <div className="hero-content">
         <div className="hero-text">
           <h1>Find Your Medicine at Your Price</h1>
@@ -13,13 +55,65 @@ const Hero = () => {
             <div className="search-container">
               <input 
                 type="text" 
-                placeholder="Type your drug name" 
+                placeholder="Type your drug name (e.g., Paracetamol, Ibuprofen)" 
                 className="search-input"
+                value={searchQuery}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
-              <button className="search-btn">
-                Search
+              <button 
+                className="search-btn"
+                onClick={handleSearch}
+                disabled={isSearching}
+              >
+                {isSearching ? 'Searching...' : 'Search'}
               </button>
             </div>
+            
+            {/* Search Results Dropdown */}
+            {showResults && (
+              <div className="search-results-dropdown">
+                {isSearching ? (
+                  <div className="loading-message">
+                    <div className="loading-spinner"></div>
+                    Searching for medicines...
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  <>
+                    <div className="results-header">
+                      <h4>Found {searchResults.length} medicine(s)</h4>
+                    </div>
+                    <div className="results-list">
+                      {searchResults.slice(0, 5).map((medicine, index) => (
+                        <div key={index} className="result-item">
+                          <div className="medicine-info">
+                            <h5>{medicine.brand}</h5>
+                            <p className="medicine-name">{medicine.name}</p>
+                            <p className="manufacturer">by {medicine.manufacturer}</p>
+                          </div>
+                          <div className="price-info">
+                            <span className="price">{medicine.price}</span>
+                            <span className={`availability ${medicine.availability.toLowerCase().replace(' ', '-')}`}>
+                              {medicine.availability}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                      {searchResults.length > 5 && (
+                        <div className="more-results">
+                          <p>+{searchResults.length - 5} more results available</p>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="no-results">
+                    <p>No medicines found for "{searchQuery}"</p>
+                    <p className="suggestion">Try searching with generic names like "Paracetamol" or brand names like "Crocin"</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           
          </div>

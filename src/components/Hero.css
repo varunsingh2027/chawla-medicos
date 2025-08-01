@@ -69,6 +69,7 @@
   margin: 30px 0;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .search-container {
@@ -78,6 +79,163 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
+}
+
+/* Search Results Dropdown */
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: #6b7280;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.results-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.results-header h4 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.results-list {
+  padding: 0;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.result-item:hover {
+  background: #f9fafb;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.medicine-info h5 {
+  margin: 0 0 4px 0;
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.medicine-info .medicine-name {
+  margin: 0 0 4px 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.medicine-info .manufacturer {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.price-info {
+  text-align: right;
+}
+
+.price {
+  display: block;
+  color: #10b981;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.availability {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.availability.in-stock {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.availability.limited-stock {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.availability.out-of-stock {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.more-results {
+  padding: 15px 20px;
+  text-align: center;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.more-results p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.no-results {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.no-results p {
+  margin: 0 0 8px 0;
+  color: #6b7280;
+}
+
+.no-results .suggestion {
+  color: #9ca3af;
+  font-size: 0.875rem;
 }
 
 .search-input {
@@ -358,6 +516,25 @@
   
   .search-btn:hover {
     background: #1557b0;
+  }
+  
+  /* Mobile search results */
+  .search-results-dropdown {
+    width: 95vw;
+    max-width: none;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .price-info {
+    align-self: flex-end;
+    text-align: right;
   }
   
   .hero-buttons {

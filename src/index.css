@@ -19,6 +19,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px; /* Account for sticky header height */
+}
+
 body {
   margin: 0;
   min-width: 320px;
