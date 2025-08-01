@@ -1,6 +1,6 @@
 // API Configuration and Service
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.com/api' 
+  ? (process.env.REACT_APP_API_URL || 'https://pharmaexport-backend.onrender.com/api')
   : 'http://localhost:5000/api';
 
 class ApiService {

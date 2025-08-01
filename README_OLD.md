@@ -2,7 +2,7 @@
 
 A comprehensive pharmaceutical distribution platform built with React.js frontend and Express.js backend, designed for medical distributors, pharmacies, and healthcare institutions.
 
-## 🌟 Features
+## � Features
 
 ### 🔍 Core Functionality
 - **Advanced Medicine Search** - Search by name, generic name, manufacturer
@@ -30,7 +30,7 @@ A comprehensive pharmaceutical distribution platform built with React.js fronten
 - **Frontend**: [https://varunsingh2027.github.io/PharmaExport-Distributor](https://varunsingh2027.github.io/PharmaExport-Distributor)
 - **Backend API**: `https://your-backend-url.onrender.com/api`
 
-## 🛠️ Tech Stack
+## �️ Tech Stack
 
 ### Frontend
 - **React.js** - Modern UI library
@@ -126,71 +126,38 @@ See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for comprehensive deployment in
 
 ### MongoDB Setup
 See [MONGODB_ATLAS_SETUP.md](./MONGODB_ATLAS_SETUP.md) for database setup guide.
-
-## 🧪 Testing
-
-```bash
-# Run frontend tests
-npm test
-
-# Run backend tests
-cd backend && npm test
-
-# Test database connection
-cd backend && node test-mongodb.js
+npm run dev
 ```
 
-## 📱 Mobile Responsiveness
+4. Open your browser and visit `http://localhost:5173`
 
-The application is fully responsive and optimized for:
-- 📱 **Mobile devices** (320px+)
-- 📱 **Tablets** (768px+)
-- 💻 **Desktops** (1024px+)
-- 🖥️ **Large screens** (1440px+)
+## 📱 Responsive Design
 
-## 🔒 Security Features
+The website is fully responsive and optimized for:
+- Desktop screens (1200px+)
+- Tablets (768px - 1199px)
+- Mobile phones (below 768px)
 
-- **JWT Authentication** - Secure token-based auth
-- **Password Hashing** - Bcrypt password encryption
-- **Input Validation** - Comprehensive input sanitization
-- **Rate Limiting** - API request rate limiting
-- **CORS Protection** - Cross-origin request security
-- **Helmet.js** - Security headers
-- **Data Validation** - Schema-based validation
+## 🎨 Design Features
+
+- **Medical Color Scheme**: Professional blue and white color palette
+- **Typography**: Clean, readable fonts for medical content
+- **Icons**: Medical-themed icons and emojis
+- **Animations**: Smooth hover effects and transitions
+- **Layout**: Grid-based responsive layout system
+
+## 📧 Contact Information
+
+This is a demo website . 
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+This project is for educational and demonstration purposes. Feel free to fork and customize for your own medical website projects.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Varun Singh**
-- GitHub: [@varunsingh2027](https://github.com/varunsingh2027)
-- Email: varunsingh04.online@gmail.com
-- LinkedIn: [Varun Singh](https://linkedin.com/in/varunsingh2027)
-
-## 🆘 Support
-
-- 📖 **Documentation**: Check the deployment guides
-- 🐛 **Bug Reports**: Create an issue on GitHub
-- 💬 **Questions**: Open a discussion on GitHub
-- 📧 **Email**: varunsingh04.online@gmail.com
-
-## 🙏 Acknowledgments
-
-- React.js community for the amazing framework
-- Express.js team for the robust backend framework
-- MongoDB for the flexible database solution
-- All open-source contributors who made this possible
+This project is for educational purposes only.
 
 ---
 
-**⭐ Star this repository if you find it helpful!**
+Built with ❤️ using React.js and Vite

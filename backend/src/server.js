@@ -48,7 +48,12 @@ app.use(morgan('combined'));
 app.use(limiter);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://varunsingh2027.github.io'] 
+    ? [
+        'https://varunsingh2027.github.io',
+        'https://pharmaexport-distributor.netlify.app',
+        'https://pharmaexport-distributor.vercel.app',
+        process.env.FRONTEND_URL
+      ].filter(Boolean)
     : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true
 }));
