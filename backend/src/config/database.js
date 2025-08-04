@@ -1,30 +1,24 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import process from 'process';
+import logger from './logger.js';
 
 const connectDB = async () => {
+  // Load environment variables first
+  dotenv.config();
+  
   try {
     // Get MongoDB URI from environment variables
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/pharmaexport-distributor';
     
-    console.log('🔄 Attempting to connect to MongoDB...');
-    console.log(`📍 Connection string: ${mongoURI.replace(/\/\/.*@/, '//***:***@')}`); // Hide credentials in logs
-    
+    // Connect to MongoDB with modern options
     const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000, // Wait 5 seconds before timeout
-      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      family: 4, // Use IPv4, skip trying IPv6
-      maxPoolSize: 10, // Maintain up to 10 socket connections
-      minPoolSize: 5, // Maintain a minimum of 5 socket connections
-      maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
-      bufferMaxEntries: 0, // Disable mongoose buffering
       bufferCommands: false, // Disable mongoose buffering
     });
-
-    console.log(`✅ MongoDB Connected Successfully!`);
-    console.log(`🏠 Host: ${conn.connection.host}`);
-    console.log(`📊 Database: ${conn.connection.name}`);
-    console.log(`🔌 Connection State: ${conn.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
+    
+    logger.info(`✅ MongoDB Connected: ${conn.connection.host}`);
     
     // Handle connection events
     mongoose.connection.on('error', (err) => {

@@ -1,6 +1,6 @@
 // API Configuration and Service
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? (process.env.REACT_APP_API_URL || 'https://pharmaexport-backend.onrender.com/api')
+const API_BASE_URL = import.meta.env.MODE === 'production' 
+  ? (import.meta.env.VITE_API_URL || 'https://pharmaexport-backend.onrender.com/api')
   : 'http://localhost:5000/api';
 
 class ApiService {
@@ -61,12 +61,22 @@ class ApiService {
   }
 
   // Health check
-  async healthCheck() {
+  async healthCheck(timeout = 5000) {
     try {
-      const response = await this.get('/health');
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      
+      const response = await this.request('/health', {
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
       console.log('🔍 Backend Status:', response);
       return response;
     } catch (error) {
+      if (error.name === 'AbortError') {
+        return { success: false, error: 'Connection timeout' };
+      }
       return { success: false, error: error.message };
     }
   }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/api.js';
 
+const MAX_RETRIES = 3;
+
 const BackendStatus = () => {
   const [backendStatus, setBackendStatus] = useState({
     connected: false,
@@ -10,7 +12,7 @@ const BackendStatus = () => {
     database: null
   });
 
-  const checkBackendStatus = async () => {
+  const checkBackendStatus = async (retries = 0) => {
     setBackendStatus(prev => ({ ...prev, loading: true }));
     
     try {
@@ -23,10 +25,15 @@ const BackendStatus = () => {
         database: response.database || null
       });
     } catch (error) {
+      if (retries < MAX_RETRIES) {
+        setTimeout(() => checkBackendStatus(retries + 1), 1000);
+        return;
+      }
+      
       setBackendStatus({
         connected: false,
         loading: false,
-        error: error.message,
+        error: `Failed after ${MAX_RETRIES} attempts: ${error.message}`,
         lastChecked: new Date().toLocaleTimeString(),
         database: null
       });
@@ -38,6 +45,19 @@ const BackendStatus = () => {
     // Check every 30 seconds
     const interval = setInterval(checkBackendStatus, 30000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   return (
@@ -82,17 +102,31 @@ const BackendStatus = () => {
       )}
       <button 
         onClick={checkBackendStatus}
+        disabled={backendStatus.loading}
         style={{
           marginTop: '4px',
           padding: '2px 6px',
           fontSize: '10px',
           border: '1px solid #d1d5db',
           borderRadius: '4px',
-          background: 'white',
-          cursor: 'pointer'
+          background: backendStatus.loading ? '#f3f4f6' : 'white',
+          cursor: backendStatus.loading ? 'default' : 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px'
         }}
       >
-        Refresh
+        {backendStatus.loading && (
+          <div style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            border: '2px solid #d1d5db',
+            borderTopColor: '#3b82f6',
+            animation: 'spin 1s linear infinite'
+          }}></div>
+        )}
+        {backendStatus.loading ? 'Checking...' : 'Refresh'}
       </button>
     </div>
   );
