@@ -61,7 +61,7 @@ class ApiService {
   }
 
   // Health check
-  async healthCheck(timeout = 5000) {
+  async healthCheck(timeout = 10000) {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeout);
